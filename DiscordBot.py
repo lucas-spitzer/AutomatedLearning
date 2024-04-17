@@ -1,4 +1,4 @@
-import discord, random, os
+import discord, random, os, sys
 from discord.ext import commands
 from dotenv import load_dotenv
 
@@ -10,7 +10,7 @@ load_dotenv()
 TOKEN = os.getenv('BOT_TOKEN')
 
 # Discord Learning Server Public Channel ID
-CHANNEL_ID = os.getenv('CHANNEL_ID')
+CHANNEL_ID = int(os.getenv('CHANNEL_ID'))
 
 # Define intents
 intents = discord.Intents.default()
@@ -39,14 +39,14 @@ async def send_media(ctx, channel_id: int, file_path: str):
     # Get the channel by its ID
     channel = bot.get_channel(channel_id)
     if channel is None:
-        print(f"Channel with ID not found.")
-        return
+        print(f"Channel ID not found.")
 
     # Send the media file
     with open(file_path, 'rb') as file:
         await channel.send(file=discord.File(file, filename=file_path))
 
-    # Stop the bot after sending the media file
+    # Stop the bot after sending the media file and exit program
     await bot.close()
+    sys.exit()
 
 bot.run(TOKEN)
