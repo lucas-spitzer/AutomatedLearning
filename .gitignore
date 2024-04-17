@@ -1,5 +1,2 @@
-# Environment variables
+# Private Environment variables
 .env
-
-# AWS credentials
-.aws/
